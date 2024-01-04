@@ -1,0 +1,42 @@
+:root {
+  --hightlight-c: hsl(253, 100%, 65%);
+
+  --underlying-c: #eee;
+  --background-c: #fff;
+
+  --shadow-c: rgba(0, 0, 0, 0.3);
+  --component-c: #ccc;
+  --header-c: #333;
+  --text-c: #666;
+}
+
+:root.dark {
+  --underlying-c: #000;
+  --background-c: #333;
+
+  --component-c: #666;
+  --header-c: #eee;
+  --text-c: #ccc;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "思源宋体";
+  transition:
+    color 0.5s,
+    background-color 0.5s;
+}
+
+::selection {
+  color: #fff;
+  background: var(--hightlight-c);
+}
+
+::-webkit-scrollbar {
+  background: var(--background-c);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--component-c);
+}
