@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import Material from "@/components/Material.vue";
-import { useMaterialStore } from "@/stores/material";
+import { useRepositoryStore } from "@/stores/repo";
 </script>
 <template>
   <div class="leafroot">
-    <material v-for="m in useMaterialStore().getNames()" :name="m" />
+    <material v-for="m in useRepositoryStore().getNames()" :name="m" />
   </div>
 </template>
 

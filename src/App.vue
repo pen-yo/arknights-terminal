@@ -9,6 +9,7 @@ const fns = ref([
   { name: "首页" },
   { name: "掉率参考" },
   { name: "死线计算" },
+  { name: "节奏榜" },
   { name: "模拟罗德岛" },
 ]);
 

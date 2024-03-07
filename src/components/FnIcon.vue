@@ -4,6 +4,7 @@ import {
   mdiHomeFlood,
   mdiNotebook,
   mdiCalculatorVariant,
+  mdiChartBox,
   mdiForum,
   mdiThemeLightDark,
 } from "@mdi/js";
@@ -18,6 +19,7 @@ const mapper = ref(
     ["首页", mdiHomeFlood],
     ["掉率参考", mdiNotebook],
     ["死线计算", mdiCalculatorVariant],
+    ["节奏榜", mdiChartBox],
     ["模拟罗德岛", mdiForum],
     ["theme", mdiThemeLightDark],
   ]),

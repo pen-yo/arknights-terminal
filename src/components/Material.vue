@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type MaterialName, useMaterialStore } from "@/stores/material";
+import { type MaterialName, useRepositoryStore } from "@/stores/repo";
 
 defineProps<{
   /** 名称 */
@@ -11,11 +11,11 @@ defineProps<{
   <div class="material">
     <div
       class="icon"
-      :style="`background-image: url(${useMaterialStore().getIcon(name)});`"
+      :style="`background-image: url(${useRepositoryStore().getIcon(name)});`"
     ></div>
     <div class="name">{{ name }}</div>
     <ul class="levels">
-      <li v-for="l in useMaterialStore().getLevelsData(name).slice(0, 3)">
+      <li v-for="l in useRepositoryStore().getLevelsData(name).slice(0, 3)">
         <div class="code">{{ l.code }}</div>
         <div class="cost">{{ l.cost }}c</div>
         <div class="efficiency">{{ l.efficiency }}c/件</div>
@@ -68,15 +68,15 @@ defineProps<{
       }
 
       & .code {
-        flex: 4;
+        flex: 6;
       }
 
       & .cost {
-        flex: 5;
+        flex: 4;
       }
 
       & .efficiency {
-        flex: 6;
+        flex: 7;
         text-align: right;
       }
     }

@@ -23,7 +23,7 @@ const names = [
 
 export type MaterialName = (typeof names)[number];
 
-export const useMaterialStore = defineStore("material", () => {
+export const useRepositoryStore = defineStore("repo", () => {
   /**
    * 获取全部名称。
    */

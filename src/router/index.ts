@@ -24,17 +24,20 @@ const router = createRouter({
       component: () => import("@/views/DeadlineCalc.vue"),
     },
     {
+      path: encodeURI("/节奏榜"),
+      component: () => import("@/views/PowerRank.vue"),
+    },
+    {
       path: encodeURI("/模拟罗德岛"),
       component: () => import("@/views/SimuRhodes.vue"),
     },
   ],
 });
 
-router.beforeEach((to, from, next) => {
+router.afterEach((to) => {
   document.title = `${decodeURI(to.path).slice(
     1,
   )} | 明日方舟 :: 终端 - 博士的控制台`;
-  next();
 });
 
 export default router;

@@ -1,54 +1,43 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { Calc } from "@/utils/calc";
-import { usePenguinIOStore } from "@/stores/penguin-io";
+import { Calc, Format, Request } from "@/apis";
+import type { InGameActivity } from "@/types/responses";
 
-interface Moment {
-  start: Date;
-  end: Date;
-  name: string;
-}
+const now = ref<InGameActivity>();
 
-const now = ref<Moment>();
-
-usePenguinIOStore()
-  .getNow()
-  .then((data) => {
-    const obj = data.reverse()[0];
-    now.value = {
-      start: new Date(obj.start),
-      end: new Date(obj.end),
-      name: obj.label_i18n.zh,
-    };
-  });
-
-/**
- * 获取可读字符串。
- */
-function toReadableStr(now: Date) {
-  const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, "0");
-  const day = String(now.getDate()).padStart(2, "0");
-  const hour = String(now.getHours()).padStart(2, "0");
-  const minute = String(now.getMinutes()).padStart(2, "0");
-
-  return `${year}年${month}月${day}日 ${hour}:${minute}`;
-}
+Request.getNowActivity().then((data) => {
+  now.value = data;
+});
 </script>
 
 <template>
   <div class="leafroot">
-    <p v-if="now">
-      {{ now?.name }}（{{ toReadableStr(now.start) }} -
-      {{ toReadableStr(now.end) }}）在国服举办中，结束前还可恢复{{
-        Calc.getPhysical(now.end)
-      }}点理智。
-    </p>
+    <span>
+      <p>现在是{{ Format.toString() }} ，</p>
+    </span>
+    <span
+      class="continue"
+      v-if="now"
+      v-for="passed in [Calc.isActuallyPassed(now)]"
+    >
+      <p>{{ now.name }}</p>
+      <p>
+        （{{ Format.toString(now.start) }} - {{ Format.toString(now.end) }}）
+      </p>
+      <p>{{ passed ? "在国服已结束。" : "在国服举办中，" }}</p>
+      <p v-if="!passed">
+        结束前还可恢复{{ Calc.getPhysical(now.end) }}点理智。
+      </p>
+    </span>
   </div>
 </template>
 
 <style scoped>
 p {
   color: var(--text-c);
+}
+
+.continue > p {
+  display: inline;
 }
 </style>
